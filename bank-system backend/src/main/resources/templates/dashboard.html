@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bank Dashboard</title>
+</head>
+<body>
+<h2>Welcome, <span th:text="${user.username}"></span></h2>
+<p>Account Number: <span th:text="${user.accountNumber}"></span></p>
+<p>Balance: <span th:text="${user.balance}"></span></p>
+
+<h3>Deposit</h3>
+<form method="post" action="/deposit">
+    <input type="number" name="amount" placeholder="Amount" required />
+    <button type="submit">Deposit</button>
+</form>
+
+<h3>Withdraw</h3>
+<form method="post" action="/withdraw">
+    <input type="number" name="amount" placeholder="Amount" required />
+    <button type="submit">Withdraw</button>
+</form>
+
+<h3>Transaction History</h3>
+<table border="1">
+    <tr>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>Date</th>
+    </tr>
+    <tr th:each="tx : ${transactions}">
+        <td th:text="${tx.type}"></td>
+        <td th:text="${tx.amount}"></td>
+        <td th:text="${tx.date}"></td>
+    </tr>
+</table>
+
+<form method="post" action="/logout">
+    <button type="submit">Logout</button>
+</form>
+</body>
+</html>
